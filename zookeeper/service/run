@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+set -o errexit -o nounset -o pipefail
+
+zk_root=/srv/zookeeper
+zk_main=org.apache.zookeeper.server.quorum.QuorumPeerMain
+
+zk_cfg="$zk_root"/zookeeper.cfg
+
+java_opts=( -Xmx4g -Xms4g "$zk_main" "$zk_cfg" )
+
+function set_classpath {
+  for zk in $(find "$zk_root"/ -name 'zookeeper-*.jar')
+  do
+    echo 'zk.jar:' $zk
+    CLASSPATH="$zk${CLASSPATH:+:$CLASSPATH}"
+  done
+  for lib in $(find "$zk_root/lib" -name '*.jar')
+  do
+    CLASSPATH="$lib${CLASSPATH:+:$CLASSPATH}"
+  done
+  export CLASSPATH
+}
+
+set_classpath
+
+exec 2>&1 chpst -u nobody:nogroup java "${java_opts[@]}"

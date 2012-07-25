@@ -44,7 +44,7 @@ function initialize_service {
     echo
     echo -e "\033[32m*** Zookeeper is starting... ***\033[0m"
     rm -f /etc/service/zookeeper
-    ln -sf /opt/zookeeper/service/zookeeper /etc/service/zookeeper
+    ln -sf /srv/zookeeper/service /etc/service/zookeeper
     #Give it enough time for runit to find it
     sleep 10
     sv -v u zookeeper 2> /dev/null || echo -e "\033[31m*** Unable to start Zookeeper. ***\033[0m"

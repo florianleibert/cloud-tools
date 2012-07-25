@@ -32,7 +32,7 @@ function install {
       echo $zk > "$data_dir"/myid
     )
     # Add runit directories for custom configurations
-    git clone https://github.com/mesos/cloud-tools
+    git clone https://github.com/florianleibert/cloud-tools
     rsync -av ./cloud-tools/zookeeper/ "$versioned_dir"
   )
 }

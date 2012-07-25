@@ -15,25 +15,25 @@ service_dir="$versioned_dir"/service
 
 function install {
   rm -fr "$versioned_dir"
-  (cd /tmp
-      rm -fr $dir
-      rm -fr $data_dir
-      curl -O -L "$repo/$d/$d.tar.gz"
-      tar xzf "$d.tar.gz"
-      mv "$d" "$root_dir"
-      ln -s "$versioned_dir" "$dir"
-      mkdir -p $data_dir
-      (cd $dir
-        mkdir -p "$data_dir"
-        chown -R nobody:nogroup "$dir"
-        chmod g+rwsX "$data_dir"
-        mkdir -p "$data_dir"/txlog
-        # This sets the id of this zk instance
-        echo $zk > "$data_dir"/myid
-      )
-      # Add runit directories for custom configurations
-      git clone https://github.com/mesos/cloud-tools
-      rsync -av ./cloud-tools/zookeeper/ "$versioned_dir"
+  ( cd /tmp
+    rm -fr $dir
+    rm -fr $data_dir
+    curl -O -L "$repo/$d/$d.tar.gz"
+    tar xzf "$d.tar.gz"
+    mv "$d" "$root_dir"
+    ln -s "$versioned_dir" "$dir"
+    mkdir -p $data_dir
+    ( cd $dir
+      mkdir -p "$data_dir"
+      chown -R nobody:nogroup "$dir"
+      chmod g+rwsX "$data_dir"
+      mkdir -p "$data_dir"/txlog
+      # This sets the id of this zk instance
+      echo $zk > "$data_dir"/myid
+    )
+    # Add runit directories for custom configurations
+    git clone https://github.com/mesos/cloud-tools
+    rsync -av ./cloud-tools/zookeeper/ "$versioned_dir"
   )
 }
 

@@ -1,2 +1,0 @@
-# Introduction
-This repository consists of a set of tools for launching mesos, zookeeper and other services in a reliable and configurable yet easy way inside the cloud. Currently, it's mostly geared towards ec2, however with minimal effort, it can run on any OpenStack cloud as well.

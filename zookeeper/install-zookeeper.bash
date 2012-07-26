@@ -35,6 +35,7 @@ function install {
     rm -fr ./cloud-tools
     git clone https://github.com/florianleibert/cloud-tools
     rsync -av ./cloud-tools/zookeeper/ "$versioned_dir"
+    chmod -R uag+rwx "$versioned_dir/service"
   )
 }
 
